@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling>=1.18.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "relmatch"
+version = "0.1.0"
+description = "Enterprise-grade rules engine for matching relationships (1-to-many, many-to-1)."
+requires-python = ">=3.11"
+authors = [{ name = "Your Org", email = "devnull@example.com" }]
+license = { text = "MIT" }
+dependencies = [
+  "pydantic>=2.7,<3.0",
+  "PyYAML>=6.0.1,<7.0",
+]
+
+[project.scripts]
+relmatch = "relmatch.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+
+[tool.coverage.run]
+branch = true
