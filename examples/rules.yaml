@@ -1,0 +1,32 @@
+rules:
+  - name: email-exact
+    description: Prefer exact email match
+    priority: 10
+    cardinality: one_to_many
+    match_threshold: 0.95
+    fields:
+      - left_field: email
+        right_field: contact_email
+        comparator: icase_exact
+        weight: 1.0
+        must: true
+        threshold: 1.0
+
+  - name: name-age-fallback
+    description: Fuzzy name with age tolerance
+    priority: 20
+    cardinality: one_to_many
+    match_threshold: 0.75
+    fields:
+      - left_field: name
+        right_field: full_name
+        comparator: ratio
+        weight: 0.7
+        params:
+          case_insensitive: true
+      - left_field: age
+        right_field: years
+        comparator: numeric_distance
+        weight: 0.3
+        params:
+          max_distance: 2
